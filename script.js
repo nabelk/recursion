@@ -34,30 +34,17 @@ console.log(fibsRec(8));
 // Recursice merge sort
 
 function mergeTwoArray(leftarr, rightarr) {
-    console.log('enter');
     const resultArr = [];
-    let leftIndex = 0;
-    let rightIndex = 0;
 
-    while (leftIndex < leftarr.length && rightIndex < rightarr.length) {
-        if (leftarr[leftIndex] < rightarr[rightIndex]) {
-            resultArr.push(leftarr[leftIndex]);
-            leftIndex++;
+    while (leftarr.length && rightarr.length) {
+        if (leftarr[0] < rightarr[0]) {
+            resultArr.push(leftarr.shift());
         } else {
-            resultArr.push(rightarr[rightIndex]);
-            rightIndex++;
+            resultArr.push(rightarr.shift());
         }
     }
 
-    if (leftarr[leftIndex]) {
-        const getOtherEle = leftarr.slice(leftIndex);
-        resultArr.push(...getOtherEle);
-    } else {
-        const getOtherEle = rightarr.slice(rightIndex);
-        resultArr.push(...getOtherEle);
-    }
-
-    return resultArr;
+    return [...resultArr, ...leftarr, ...rightarr];
 }
 
 function mergeSort(arr) {
@@ -69,3 +56,4 @@ function mergeSort(arr) {
     return mergeTwoArray(mergeSort(leftSide), mergeSort(rightSide));
 }
 console.log(mergeSort([7, 2, 4, 1, 3, 5, 6, 8, 9, 10]));
+console.log(mergeSort([3, 2, 2, 1]));
